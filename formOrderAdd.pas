@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, OrderHandler;
 
 type
   TfrmOrderAdd = class(TForm)
@@ -40,6 +40,14 @@ end;
 
 procedure TfrmOrderAdd.Button3Click(Sender: TObject);
 begin
+  with TOrderHandler.create(FDQuery1.) do
+  begin
+    AddOrder(edtDesc.Text, strtocurr(edtTotal.Text));
+    free();
+  end;
+
+
+   {
   with frmOrderList do
   begin
     FDQuery1.Connection.Connected := true;
@@ -49,7 +57,7 @@ begin
     FDQuery1.SQL.Add('''' + edtDesc.Text + ''',');
     FDQuery1.SQL.Add(edtTotal.Text + ')');
     FDQuery1.ExecSQL();
-  end;
+  end;    }
 
   close();
 end;

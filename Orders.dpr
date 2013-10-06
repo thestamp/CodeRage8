@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   formOrderList in 'formOrderList.pas' {frmOrderList},
   formOrderEdit in 'formOrderEdit.pas' {frmOrderEdit},
-  formOrderAdd in 'formOrderAdd.pas' {frmOrderAdd};
+  formOrderAdd in 'formOrderAdd.pas' {frmOrderAdd},
+  Order in 'Order.pas';
 
 {$R *.res}
 
