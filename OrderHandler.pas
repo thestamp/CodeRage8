@@ -5,7 +5,9 @@ interface
 uses
   classes,
 
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client,
+
+  Order;
 
 type
   TOrderHandler = class(TObject)
@@ -53,8 +55,29 @@ begin
 end;
 
 procedure TOrderHandler.GetOrders(Orders: TList);
+var
+  Query : TFDQuery;
+  Order : TOrder;
 begin
+  Query := TFDQuery.Create(nil);
+  Query.Connection := fConnection;
 
+  Query.SQL.Clear;
+  Query.SQL.Add('select Id, Description, Total from Orders order by Id');
+  Query.OpenOrExecute();
+
+  while not Query.Eof do
+  begin
+    Order := TOrder.Create();
+    Order.Description := Query.fieldByName('Description').AsString;
+    Order.Id := Query.fieldByName('Id').AsInteger;
+    Order.Total := Query.fieldByName('Total').AsCurrency;
+    Orders.Add(Order);
+
+    Query.Next();
+  end;
+
+  Query.free();
 end;
 
 end.

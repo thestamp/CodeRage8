@@ -40,24 +40,11 @@ end;
 
 procedure TfrmOrderAdd.Button3Click(Sender: TObject);
 begin
-  with TOrderHandler.create(FDQuery1.) do
+  with TOrderHandler.create(frmOrderList.FDConnection1) do
   begin
     AddOrder(edtDesc.Text, strtocurr(edtTotal.Text));
     free();
   end;
-
-
-   {
-  with frmOrderList do
-  begin
-    FDQuery1.Connection.Connected := true;
-
-    FDQuery1.SQL.Clear;
-    FDQuery1.SQL.Add('insert into orders (description, total) values (');
-    FDQuery1.SQL.Add('''' + edtDesc.Text + ''',');
-    FDQuery1.SQL.Add(edtTotal.Text + ')');
-    FDQuery1.ExecSQL();
-  end;    }
 
   close();
 end;

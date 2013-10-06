@@ -13,7 +13,7 @@ uses
   FireDAC.Comp.UI,
 
   //added
-  formOrderAdd ;
+  formOrderAdd, OrderHandler, Order ;
 
 type
   TfrmOrderList = class(TForm)
@@ -62,21 +62,33 @@ end;
 procedure TfrmOrderList.Button3Click(Sender: TObject);
 var
   li : TListItem;
+  Orders : TList;
+  i: Integer;
+  Order : TOrder;
 begin
-  FDQuery1.Connection.Connected := true;
 
-  FDQuery1.SQL.Clear;
-  FDQuery1.SQL.Add('select Id, Description, Total from Orders order by Id');
-  FDQuery1.OpenOrExecute();
+  Orders := TList.Create();
+  with TOrderHandler.create(frmOrderList.FDConnection1) do
+  begin
+    GetOrders(Orders);
+    free();
+  end;
 
   ListView1.Items.Clear;
-  while not FDQuery1.Eof do
+
+  for i := 0 to Orders.Count - 1 do
   begin
+    Order := TOrder(Orders[i]);
     li := ListView1.Items.Add();
-    li.Caption := FDQuery1.Fields[0].AsString;
-    li.SubItems.Add(FDQuery1.Fields[1].AsString);
-    li.SubItems.Add(FDQuery1.Fields[2].AsString);
-    FDQuery1.Next;
+    li.Caption := inttostr(Order.Id);
+    li.SubItems.Add(Order.Description);
+    li.SubItems.Add(currtostr(Order.Total));
+  end;
+
+  while Orders.Count > 0 do
+  begin
+    TOrder(Orders[0]).Free();
+    Orders.Delete(0);
   end;
 end;
 
@@ -101,6 +113,7 @@ end;
 
 procedure TfrmOrderList.FormCreate(Sender: TObject);
 begin
+  FDConnection1.Connected := true;
   Button3Click(nil);
 end;
 

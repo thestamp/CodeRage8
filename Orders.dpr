@@ -5,7 +5,8 @@ uses
   formOrderList in 'formOrderList.pas' {frmOrderList},
   formOrderEdit in 'formOrderEdit.pas' {frmOrderEdit},
   formOrderAdd in 'formOrderAdd.pas' {frmOrderAdd},
-  Order in 'Order.pas';
+  Order in 'Order.pas',
+  OrderHandler in 'OrderHandler.pas';
 
 {$R *.res}
 
