@@ -1,4 +1,4 @@
-unit Unit1;
+unit formOrderList;
 
 interface
 
@@ -13,10 +13,10 @@ uses
   FireDAC.Comp.UI,
 
   //added
-  Unit2 ;
+  formOrderAdd ;
 
 type
-  TForm1 = class(TForm)
+  TfrmOrderList = class(TForm)
     ListView1: TListView;
     Button1: TButton;
     Button2: TButton;
@@ -40,26 +40,26 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmOrderList: TfrmOrderList;
 
 implementation
 
 {$R *.dfm}
 
-uses Unit2edit;
+uses formOrderEdit;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TfrmOrderList.Button1Click(Sender: TObject);
 begin
    application.Terminate;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TfrmOrderList.Button2Click(Sender: TObject);
 begin
-  add.showModal;
+  frmOrderAdd.showModal;
   Button3Click(nil);
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TfrmOrderList.Button3Click(Sender: TObject);
 var
   li : TListItem;
 begin
@@ -80,15 +80,15 @@ begin
   end;
 end;
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TfrmOrderList.Button4Click(Sender: TObject);
 begin
-  editorder.Desc.Text := ListView1.Selected.SubItems[0];
-  editorder.Total.Text := ListView1.Selected.SubItems[1];
-  editorder.ShowModal;
+  frmOrderEdit.Desc.Text := ListView1.Selected.SubItems[0];
+  frmOrderEdit.Total.Text := ListView1.Selected.SubItems[1];
+  frmOrderEdit.ShowModal;
   Button3Click(nil);
 end;
 
-procedure TForm1.Button5Click(Sender: TObject);
+procedure TfrmOrderList.Button5Click(Sender: TObject);
 begin
   FDQuery1.Connection.Connected := true;
 
@@ -99,7 +99,7 @@ begin
   Button3Click(nil);
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmOrderList.FormCreate(Sender: TObject);
 begin
   Button3Click(nil);
 end;

@@ -84,16 +84,16 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Unit1.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="formOrderList.pas">
+            <Form>frmOrderList</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Unit2edit.pas">
-            <Form>editorder</Form>
+        <DCCReference Include="formOrderEdit.pas">
+            <Form>frmOrderEdit</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Unit2.pas">
-            <Form>add</Form>
+        <DCCReference Include="formOrderAdd.pas">
+            <Form>frmOrderAdd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

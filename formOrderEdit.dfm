@@ -1,4 +1,4 @@
-object editorder: Teditorder
+object frmOrderEdit: TfrmOrderEdit
   Left = 0
   Top = 0
   Caption = 'Add Order'

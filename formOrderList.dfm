@@ -1,4 +1,4 @@
-object Form1: TForm1
+object frmOrderList: TfrmOrderList
   Left = 0
   Top = 0
   Caption = 'Orders'

@@ -1,4 +1,4 @@
-object add: Tadd
+object frmOrderAdd: TfrmOrderAdd
   Left = 0
   Top = 0
   Caption = 'Add Order'

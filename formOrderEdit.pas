@@ -1,4 +1,4 @@
-unit Unit2;
+unit formOrderEdit;
 
 interface
 
@@ -7,9 +7,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  Tadd = class(TForm)
-    edtDesc: TLabeledEdit;
-    edtTotal: TLabeledEdit;
+  TfrmOrderEdit = class(TForm)
+    Desc: TLabeledEdit;
+    Total: TLabeledEdit;
     Button1: TButton;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -24,30 +24,30 @@ type
   end;
 
 var
-  add: Tadd;
+  frmOrderEdit: TfrmOrderEdit;
 
 implementation
 
 uses
-  Unit1;
+  formOrderList;
 
 {$R *.dfm}
 
-procedure Tadd.Button1Click(Sender: TObject);
+procedure TfrmOrderEdit.Button1Click(Sender: TObject);
 begin
-  edtTotal.Text := inttostr(strtoint(edit1.Text) + strtoint(Edit2.Text));
+  Total.Text := inttostr(strtoint(edit1.Text) + strtoint(Edit2.Text));
 end;
 
-procedure Tadd.Button3Click(Sender: TObject);
+procedure TfrmOrderEdit.Button3Click(Sender: TObject);
 begin
-  with Form1 do
+  with frmOrderList do
   begin
     FDQuery1.Connection.Connected := true;
-
     FDQuery1.SQL.Clear;
-    FDQuery1.SQL.Add('insert into orders (description, total) values (');
-    FDQuery1.SQL.Add('''' + edtDesc.Text + ''',');
-    FDQuery1.SQL.Add(edtTotal.Text + ')');
+    FDQuery1.SQL.Add('update orders set');
+    FDQuery1.SQL.Add('description = ''' + Desc.Text + ''',');
+    FDQuery1.SQL.Add('total = ' + Total.Text);
+    FDQuery1.SQL.Add('where ID = ' + ListView1.Selected.Caption);
     FDQuery1.ExecSQL();
   end;
 
