@@ -1,0 +1,68 @@
+Seperating Logic from UI
+
+You hear about how great it is to have your logic seperate from your User Interface, especially with Delphi XE5's support for android. But you never hear what needs to be done to move towards that goal. Hopefully this talk will put you in the right direction towards making your applications more scalable, threadable, and multi-platform capable.
+
+
+
+
+1) Get Source Control. Cannot stress this enough. 
+	-Benefits for single person:
+		-Code Revisions
+		-Backups of code
+		-"Time Machine" of history
+
+	-Benefits for multiple people:
+		-Everyone is synced
+		-No changes overwritten
+
+	Other Benefits:
+		-Branching
+		-Easy to set up locally
+
+	Free on-premesis:
+		Perforce (free for small teams)
+		Subversion (Open Source)
+		Git
+
+	Free Hosted (look at terms):
+		GitHub
+		bitbucket
+ 		Assembla
+		Unfuddle
+
+*Create repo in GitHub
+*go to windows.github.com to download github
+*map repo to folder
+*commit changes
+
+2) Rename your units. Little risk, makes your codebase much more organized.
+	-Classes: no prefix
+	form unit: formOrder
+	form name: frmOrder
+
+	-Child dialogs:
+	OrderList
+	OrderEdit
+
+	-Clean up dialog calling
+	Create, 
+	if (ModelResult = mrOK), 
+	then free
+
+	-Correct Button Naming
+	OK, CANCEL
+
+	-Set Form Layout
+	Use Panels with Alignment, controls with anchors/alignment
+	Set Dialog system buttons (no minimize, sizeable if useful)
+
+3) Encapsulate your business logic
+	-Wrap your and business logic into functions on the form, returning results
+	-Move the logic into a class
+
+4) Form organization
+	-Dialogs are class functions, calling business logic to save
+	
+*NOTES*
+	-Embrace Exceptions! They are there to help you. Do not handle exceptions that are errors in your business logic. For simplicity, let the UI layer handle it.
+
